@@ -40,18 +40,22 @@
         </div>
         <p>
             Chances of the email being a phishing email:
-            <div id="results">
-                ...
+            <div id="results" class="d-inline-block"></div>/100
+        </p>
+        <p>
+            Reason for score:
+            <div id="reason">
+                
             </div>
-            /100
         </p>
     </div>
 </body>
 <script>
-    var results = document.getElementById('results')
-    var button = document.getElementById('button')
-    var emailSubject = document.getElementById('emailSubject')
-    var emailBody = document.getElementById('emailBody')
+    const results = document.getElementById('results')
+    const reason = document.getElementById('reason')
+    const button = document.getElementById('button')
+    const emailSubject = document.getElementById('emailSubject')
+    const emailBody = document.getElementById('emailBody')
 
 
     // worth 5 pts
@@ -119,7 +123,7 @@
         let body = emailBody.value.toLowerCase()
         let subject = emailSubject.value.toLowerCase()
 
-        var total = 0
+        let total = 0
 
         let m
         let matches = []
@@ -146,24 +150,33 @@
             });
         }
 
+        let text = ''
+
         matches.forEach(e => {
             if(numRegEx.test(e)){
                 total += 5
+                text += `Email contains unusual link: ${e}<br>`
             }
         })
 
         keyWords.forEach(e =>{
             if(body.includes(e)){
                 total += 5
+                text += `Subject contains keyword: ${e}<br>`
             }
+        })
+
+        keyWords.forEach(e =>{
             if(subject.includes(e)){
                 total += 5
+                text += `Body contains keyword: ${e}<br>`
             }
         })
         
         if(total > 99)
             total = 99
         results.innerHTML = total
+        reason.innerHTML = text
     }
 
 
