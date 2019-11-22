@@ -59,37 +59,24 @@
     const reason = document.getElementById('reason')
 
     const keyWords = [
-        "'",
-        "<",
-        "or",
-        "and",
-        "=",
-        '"',
-        "-",
-        "--",
-        " ",
-        "union",
-        "select",
-        "all",
-        ";",
-        "insert",
-        "set",
-        "identity",
-        "update",
-        "drop",
-        "delete",
-        "if",
-        "else",
-        "case",
-        "when",
-        "then",
-        "end",
-        "compute",
-        "sum",
-        "avg",
-        "average",
-        "table",
-        "*"
+      "1=1",
+      "--",
+      "\"",
+      "convert",
+      "int",
+      "sysobjects",
+      "xtype",
+      "union",
+      ";",
+      "shutdown",
+      "@",
+      "1=0",
+      "ascii",
+      "substring",
+      "waitfor",
+      "exec",
+      "char",
+      "0x",
     ]
 
     function buttonClicked() {
@@ -104,7 +91,7 @@
             }
         })
         
-        let numPairs = (total / 10) / 2
+        let numPairs = Math.floor((total / 10) / 2)
         for (i = 0; i < numPairs; i++) {
           total += 50
         }
