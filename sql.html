@@ -31,6 +31,76 @@
         </div>
         <div class="text-center">
             <h1>Task 2: SQL</h1>
+            <div class="w-75 m-auto">
+              <div>
+                <label for="sqlquery">SQL Query</label>
+                <input class="form-control mb-3" id="query" placeholder="Query" />
+              </div>
+              <div class="pt-5 pb-5">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="buttonClicked()">
+                  Submit
+                </button>
+              </div>
+              <p>
+                Chances of bad intentions:
+                <div id="results" class="d-inline-block"></div>/100
+              </p>
+              <p>
+                Reason for score:
+                <div id="reason"/>
+              </p>
+            </div>
         </div>
     </body>
+  <script>
+    const button = document.getElementById('button')
+    const sqlQuery = document.getElementById('query')
+    const results = document.getElementById('results')
+    const reason = document.getElementById('reason')
+
+    const keyWords = [
+      "1=1",
+      "--",
+      "\"",
+      "convert",
+      "int",
+      "sysobjects",
+      "xtype",
+      "union",
+      ";",
+      "shutdown",
+      "@",
+      "1=0",
+      "ascii",
+      "substring",
+      "waitfor",
+      "exec",
+      "char",
+      "0x",
+    ]
+
+    function buttonClicked() {
+        let query = sqlQuery.value.toLowerCase()
+        let total = 0
+        let text = ''
+        
+        keyWords.forEach(e =>{
+            if(query.includes(e)){
+                total += 10
+                text += `Input contains keyword: ${e}<br>`
+            }
+        })
+        
+        let numPairs = Math.floor((total / 10) / 2)
+        for (i = 0; i < numPairs; i++) {
+          total += 50
+        }
+
+        if(total > 99) {
+          total = 99
+        }
+        results.innerHTML = total
+        reason.innerHTML = text
+    }
+  </script>
 </html>
